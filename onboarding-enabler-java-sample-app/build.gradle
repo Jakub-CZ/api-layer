@@ -40,11 +40,18 @@ dependencies {
     def tomcatVersion = '9.0.1'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
         "org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",
-        "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+        "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}",
+        libraries.jersey_container_servlet_core,
+        libraries.jersey_hk2
+        //libraries.jaxb_api,
+//         libraries.jersey_server,  // not needed?
+//         libraries.jersey_media_json_jackson,  // not needed?
+//         libraries.jackson_dataformat_yaml  // not needed?
 }
 
 tomcat {
-    httpsPort = 10016
+    httpPort = 8088
+    httpsPort = 10443
     ajpPort = 8009
     stopPort = 8081
     contextPath = '/'
@@ -54,5 +61,6 @@ tomcat {
     tomcatRun.keystorePass = "password"
     tomcatRun.truststorePass = "password"
     httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
+    httpsProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
     ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
 }
